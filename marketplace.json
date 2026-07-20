@@ -1,0 +1,21 @@
+{
+  "name": "hermes-skills",
+  "version": "0.1.0",
+  "description": "Curated subset of Hermes skills (~/.hermes/skills/) for Claude Code. Auto-published from the Hermes source-of-truth via ~/.local/bin/hermes-skills-resync --publish.",
+  "owner": {
+    "name": "Hermes (via Spids)",
+    "email": "spids@example.invalid"
+  },
+  "plugins": [
+    {
+      "name": "hermes-skills",
+      "description": "Skills curated from ~/.hermes/skills/ — symlinked to the Hermes source. Updated via `~/.local/bin/hermes-skills-resync --publish`.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Hermes (via Spids)"
+      },
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}
