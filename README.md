@@ -67,3 +67,58 @@ the include list. Today (2026-07-20) the list is:
 
 None — this plugin provides skills only. Hindsight auto-recall/retain hooks come from the
 `hindsight-memory@hindsight` plugin (configured separately).
+
+
+## Use from Claude Code
+
+Once installed via this marketplace, the skills appear in Claude Code under
+the `hermes-skills` plugin. Invoke them with slash commands:
+
+```
+/hermes-skills:claude-code-hindsight-setup      # install/configure Hindsight
+/hermes-skills:cloudflare                       # Cloudflare platform help
+/hermes-skills:wrangler                         # Cloudflare Workers CLI
+/hermes-skills:mmx-cli                          # MiniMax media generation
+... (etc, 28 skills)
+/hermes-skills:list                             # (no built-in — use claude plugin list)
+```
+
+## Use from Hermes
+
+The symlinks under `skills/` always reflect `~/.hermes/skills/<name>/SKILL.md`.
+To add a new skill from Hermes to this plugin:
+
+```bash
+# 1. Add to the canonical include list (creates the symlink everywhere, dry-run safe)
+~/.local/bin/hermes-skills-resync --add my-new-skill
+~/.local/bin/hermes-skills-resync --apply
+
+# 2. Push to GitHub (resolves symlinks to real files, commits, pushes)
+~/.local/bin/hermes-skills-publish
+```
+
+To remove:
+
+```bash
+~/.local/bin/hermes-skills-resync --remove my-old-skill
+~/.local/bin/hermes-skills-resync --apply
+~/.local/bin/hermes-skills-publish
+```
+
+## Bidirectional sync notes
+
+- **Hermes → Claude Code**: edit any `SKILL.md` under `~/.hermes/skills/`. Since
+  Claude Code's plugin cache points at the same path (via symlink in the marketplace
+  directory), changes are visible instantly to running Claude Code sessions.
+- **Claude Code → Hermes**: write a new file into the plugin's `skills/<name>/SKILL.md`
+  in your local plugin cache; the symlink means it lands in `~/.hermes/skills/`. Then
+  run `hermes-skills-publish` to push to GitHub so the team sees it.
+- **GitHub → local**: `claude plugin marketplace update hermes-skills && claude plugin install hermes-skills`.
+
+## Why this is public
+
+GitHub blocks `raw.githubusercontent.com` for private repos unless the request is
+authenticated, and Claude Code's marketplace fetcher uses anonymous HTTPS. A private
+version is mirrored via the git remote in `~/integ/hermes-skills` if needed; just
+delete the `gh-pages` (or this `main`) branch on `4rgs-org/hermes-skills` and
+re-publish to a private repo to take it back down.
