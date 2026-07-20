@@ -1,0 +1,16 @@
+{
+  "name": "hermes-skills",
+  "version": "0.1.0",
+  "description": "Curated subset of Hermes skills synchronized bi-directionally with ~/.hermes/skills/. Auto-recall powered by Hindsight bank 'hermes'.",
+  "author": {
+    "name": "Hermes (via Spids)"
+  },
+  "license": "MIT",
+  "keywords": [
+    "hermes",
+    "skills",
+    "sync",
+    "memory",
+    "hindsight"
+  ]
+}
